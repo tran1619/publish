@@ -1,4 +1,4 @@
-<Context path="/publisher" docBase="c:\users\michael\workspace\publisher\web">
+<Context path="/publisher" docBase="c:\git\publisher\web">
   <Resource name="datasource" 
             type="javax.sql.DataSource"
             auth="Container"
