@@ -1,8 +1,9 @@
 package publisher.data;
 
-public class User extends PersistentObject{
+public class User extends PersistentObject {
 	private String username;
 	private String password;
+	private String accessKey;
 
 	public String getPassword() {
 		return password;
@@ -18,5 +19,13 @@ public class User extends PersistentObject{
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getAccessKey() {
+		return accessKey;
+	}
+
+	public void setAccessKey(String accessKey) {
+		this.accessKey = accessKey;
 	}
 }

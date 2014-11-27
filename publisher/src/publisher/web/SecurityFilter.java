@@ -48,6 +48,13 @@ public class SecurityFilter implements Filter {
 			return;
 		}
 		
+		// Allow access to web service
+		if(servletPath.equals("/unpublish"))
+		{
+			chain.doFilter(req, resp);
+			return;
+		}
+		
 		// All other functionality requires authentication.
 		HttpSession session = req.getSession();
 		Long userId = (Long) session.getAttribute("userId");

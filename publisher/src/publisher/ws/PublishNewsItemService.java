@@ -19,6 +19,8 @@ import org.jdom.output.XMLOutputter;
 
 import publisher.data.NewsItem;
 import publisher.data.NewsItemDAO;
+import publisher.data.User;
+import publisher.data.UserDAO;
 
 public class PublishNewsItemService extends HttpServlet {
 	private Logger logger = Logger.getLogger(this.getClass());
@@ -46,6 +48,21 @@ public class PublishNewsItemService extends HttpServlet {
 			Element linkElement = item.getChild("link");
 			String link = linkElement.getText();
 			
+			  // Authenticate client.
+		      Element accessKeyElement = item.getChild("accessKey");
+		      if (accessKeyElement == null)
+		      {
+		         resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		         return;
+		      }
+		      String accessKey = accessKeyElement.getText();
+		      User user = new UserDAO().findByAccessKey(accessKey);
+		      if (user == null)
+		      {
+		         resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		         return;
+		      }
+		      
 			// Create news item from submitted data
 			NewsItem newsItem = new NewsItem();
 			newsItem.setTitle(title);
